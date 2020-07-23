@@ -1,0 +1,42 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="order != undefined">
+    <div *ngFor="let item of order.orderEquipment">
+      <ion-card>
+        <ion-card-header>
+          <ion-item-divider>
+            <ion-icon name="agilit-machine" class="icon-default-size"></ion-icon>
+            <ion-label class="font-size-large m-left-4"><strong>{{item.equipment.description}}</strong></ion-label>
+          </ion-item-divider>
+        </ion-card-header> 
+        
+        <ion-card-header>
+          <ion-item-divider>            
+            <ion-icon name="agilit-place" class="icon-default-size color-blue"></ion-icon>
+            <ion-label class="font-size-large m-left-6"><strong>{{item.installationArea.description}}</strong></ion-label>
+          </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content>
+          <div (click)="expandOperation(item)">
+            <ion-icon class="p-right-2 arrow-icons-right icon-default-size" name="arrow-forward" *ngIf="!item.operation_expanded"></ion-icon>
+            <ion-icon class="p-right-2 arrow-icons-right icon-default-size" name="arrow-down" *ngIf="item.operation_expanded"></ion-icon>
+            <ion-label class="align-center">Operações</ion-label>
+          </div>          
+          <div *ngIf="item.operation_expanded">
+            <ion-list>
+              <ion-item *ngFor="let operation of item.orderOperation" (click)="expandComponent(operation)">                
+                <div style="display: flex; align-items: center;">
+                  <ion-label class="font-size-large font-arial color-secondary">{{operation.description}}</ion-label>
+                </div>                
+              </ion-item>
+            </ion-list>          
+          </div>          
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    
+  </div>  
+</ion-content>
